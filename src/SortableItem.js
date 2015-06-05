@@ -26,7 +26,7 @@ var SortableItem = React.createClass({
   },
   handleDragStart(e) {
     e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/html', null);
+    e.dataTransfer.setData('text', '');
     if (this.props.onDragStart) {
       this.props.onDragStart(this.props.sortKey);
     }
