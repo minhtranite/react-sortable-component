@@ -33,6 +33,11 @@ var SortableItem = React.createClass({
   },
   handleDragOver(e) {
     e.preventDefault();
+    if (!this.state.isOver) {
+      this.setState({
+        isOver: true
+      });
+    }
     e.dataTransfer.dropEffect = 'move';
     if (this.props.onDragOver) {
       this.props.onDragOver(this.props.sortKey);
