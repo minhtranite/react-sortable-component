@@ -69,7 +69,7 @@ require('react-sortable-component/lib/sortable.css');
 <link rel="stylesheet" type="text/css" href="path/to/react-sortable-component/lib/sortable.css">
 ```
 
-**or appy your style:**
+**or apply your style:**
 
 ```css
 [draggable] {
@@ -118,7 +118,7 @@ require('react-sortable-component/lib/sortable.css');
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| childrent | node | true | | List of SortableItem |
+| children | node | true | | List of SortableItem |
 | items | array | false | | List item need sort. |
 | onSort | func(arg) | false | | Callback when items sorted. If `items` prop is defined then `arg` is sorted items else `arg` is list index of sorted items. |
 | className | string | false | | Your custom class name. |
@@ -127,7 +127,7 @@ require('react-sortable-component/lib/sortable.css');
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| childrent | node | true | | Sortable item content. |
+| children | node | true | | Sortable item content. |
 | draggable | bool | false | true | |
 | className | string | false | | Your custom class name. |
 
