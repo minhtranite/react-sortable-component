@@ -37,7 +37,7 @@ getInitialState: function () {
     var items = this.state.items.map(function (item) {
       return (
         <SortableItem key={item.src} className='sort-sample-item'>
-          <LazySizes className='point-events-none' dataSrc={item.src}
+          <LazySizes className='pointer-events-none' dataSrc={item.src}
             width='126'
             height='126'/>
         </SortableItem>
