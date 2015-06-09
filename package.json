@@ -1,6 +1,6 @@
 {
   "name": "react-sortable-component",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sortable component for ReactJS.",
   "main": "lib/index.js",
   "scripts": {
@@ -67,12 +67,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/user-name/component-name.git"
+    "url": "https://github.com/vn38minhtran/react-sortable-component.git"
   },
-  "author": "Your Name",
+  "author": "Minh Tran",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/user-name/component-name/issues"
+    "url": "https://github.com/vn38minhtran/react-sortable-component/issues"
   },
-  "homepage": "https://github.com/user-name/component-name"
+  "homepage": "https://github.com/vn38minhtran/react-sortable-component"
 }
