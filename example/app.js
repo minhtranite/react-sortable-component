@@ -1,35 +1,34 @@
-var React = require('react');
-var LazySizes = require('react-lazysizes');
+import 'babel-core/polyfill';
+import React from 'react';
+import Header from './components/Header.js';
+import Footer from './components/Footer.js';
+import LazySizes from 'react-lazysizes';
+import {SortableItems, SortableItem} from '../src/index';
 
-require('./bower_components/bootstrap-customize/css/bootstrap.css');
-require('./assets/styles/app.scss');
-require('../src/sortable.scss');
+import './bower_components/bootstrap-customize/css/bootstrap.css';
+import '../src/sortable.scss';
+import './assets/styles/app.scss';
 
-var Header = require('./components/Header');
-var Footer = require('./components/Footer');
-var {SortableItems, SortableItem} = require('../src/index');
-
-var App = React.createClass({
-  getInitialState: function () {
-    return {
-      items: [
-        {src: 'http://lorempixel.com/400/400/sports/1'},
-        {src: 'http://lorempixel.com/400/400/sports/2'},
-        {src: 'http://lorempixel.com/400/400/sports/3'},
-        {src: 'http://lorempixel.com/400/400/sports/4'},
-        {src: 'http://lorempixel.com/400/400/sports/5'},
-        {src: 'http://lorempixel.com/400/400/sports/6'},
-        {src: 'http://lorempixel.com/400/400/sports/7'}
-      ]
-    };
-  },
-  handleSort: function (items) {
+class App extends React.Component {
+  state = {
+    items: [
+      {src: 'http://lorempixel.com/400/400/sports/1'},
+      {src: 'http://lorempixel.com/400/400/sports/2'},
+      {src: 'http://lorempixel.com/400/400/sports/3'},
+      {src: 'http://lorempixel.com/400/400/sports/4'},
+      {src: 'http://lorempixel.com/400/400/sports/5'},
+      {src: 'http://lorempixel.com/400/400/sports/6'},
+      {src: 'http://lorempixel.com/400/400/sports/7'}
+    ]
+  };
+  handleSort = (items) => {
     this.setState({
       items: items
     });
-  },
-  render: function () {
-    var items = this.state.items.map(function (item) {
+  };
+
+  render() {
+    let items = this.state.items.map(function (item) {
       return (
         <SortableItem key={item.src} className='sort-sample-item'>
           <LazySizes className='pointer-events-none' dataSrc={item.src}
@@ -52,7 +51,14 @@ var App = React.createClass({
       </div>
     );
   }
-});
+}
 
-React.render(<App />, document.body);
+function run() {
+  React.render(<App />, document.body);
+}
 
+if (window.addEventListener) {
+  window.addEventListener('DOMContentLoaded', run);
+} else {
+  window.attachEvent('onload', run);
+}

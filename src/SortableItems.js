@@ -1,62 +1,73 @@
-var React = require('react');
+import React from 'react';
 
-var SortableItems = React.createClass({
-  propTypes: {
+class SortableItems extends React.Component {
+  static propTypes = {
     items: React.PropTypes.array,
+    sort: React.PropTypes.func,
     onSort: React.PropTypes.func,
     children: React.PropTypes.node.isRequired,
     className: React.PropTypes.string
-  },
-  componentWillMount: function () {
+  };
+
+  static defaultProps = {
+    sort: (items, from, to) => {
+      if (from === undefined || to === undefined) {
+        return items;
+      }
+      let cloneItems = items.slice(0);
+      cloneItems.splice(to, 0, cloneItems.splice(from, 1)[0]);
+      return cloneItems;
+    }
+  };
+
+  componentWillMount = () => {
     this.handleProps(this.props);
-  },
-  componentWillReceiveProps: function (nextProps) {
+  };
+
+  componentWillReceiveProps = (nextProps) => {
     this.handleProps(nextProps);
-  },
-  handleProps: function (props) {
+  };
+
+  handleProps = (props) => {
     if (!props.children) {
       throw new Error('SortableItems must contain at least one SortableItem');
     }
 
-    var children = props.children;
+    let children = props.children;
     if (!Array.isArray(children)) {
       children = [children];
     }
 
-    var keys = children.map(function (c, i) {
+    let keys = children.map(function (c, i) {
       return i;
     });
 
     this.setState({
       keys: keys
     });
-  },
-  handleDragStart(sortKey) {
+  };
+
+  handleDragStart = (sortKey) => {
     this.dragKey = sortKey;
-  },
-  handleDrop(sortKey) {
-    var items = this.sort(this.props.items || this.state.keys, this.dragKey, sortKey);
+  };
+
+  handleDrop = (sortKey) => {
+    let items = this.props.sort(this.props.items || this.state.keys, this.dragKey, sortKey);
     if (this.props.onSort) {
       this.props.onSort(items);
     }
-  },
-  handleDragEnd: function () {
+  };
+
+  handleDragEnd = ()=> {
     this.dragKey = undefined;
-  },
-  sort: function (items, from, to) {
-    if (from === undefined || to === undefined) {
-      return items;
-    }
-    var cloneItems = items.slice(0);
-    cloneItems.splice(to, 0, cloneItems.splice(from, 1)[0]);
-    return cloneItems;
-  },
-  render: function () {
-    var children = this.props.children;
+  };
+
+  render() {
+    let children = this.props.children;
     if (!Array.isArray(children)) {
       children = [children];
     }
-    var newChildren = children.map(function (child, index) {
+    let newChildren = children.map(function (child, index) {
       return React.cloneElement(child, {
         sortKey: index,
         draggable: child.props.draggable,
@@ -68,13 +79,13 @@ var SortableItems = React.createClass({
         onDragEnd: this.handleDragEnd
       });
     }.bind(this));
-    var className = 'sortable-items' + (this.props.className ? (' ' + this.props.className) : '');
+    let className = 'sortable-items' + (this.props.className ? (' ' + this.props.className) : '');
     return (
       <div className={className}>
         {newChildren}
       </div>
     );
   }
-});
+}
 
-module.exports = SortableItems;
+export default SortableItems;
