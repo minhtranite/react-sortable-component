@@ -2,6 +2,7 @@ import React from 'react';
 
 class SortableItems extends React.Component {
   static propTypes = {
+    name: React.PropTypes.string.isRequired,
     items: React.PropTypes.array,
     sort: React.PropTypes.func,
     onSort: React.PropTypes.func,
@@ -38,8 +39,8 @@ class SortableItems extends React.Component {
       children = [children];
     }
 
-    let keys = children.map(function (c, i) {
-      return i;
+    let keys = children.map(function (child, index) {
+      return index;
     });
 
     this.setState({
@@ -69,6 +70,7 @@ class SortableItems extends React.Component {
     }
     let newChildren = children.map(function (child, index) {
       return React.cloneElement(child, {
+        name: this.props.name,
         sortKey: index,
         draggable: child.props.draggable,
         onDragStart: this.handleDragStart,

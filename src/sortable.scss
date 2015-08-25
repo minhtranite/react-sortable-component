@@ -6,6 +6,7 @@
 }
 
 .sortable-items {
+  margin-left: -10px;
   &:before,
   &:after {
     content: " ";

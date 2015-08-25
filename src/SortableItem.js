@@ -4,6 +4,7 @@ import ClassNames from 'classnames';
 class SortableItem extends React.Component {
   static propTypes = {
     children: React.PropTypes.node.isRequired,
+    name: React.PropTypes.string,
     sortKey: React.PropTypes.any,
     draggable: React.PropTypes.bool,
     onDragStart: React.PropTypes.func,
@@ -24,8 +25,10 @@ class SortableItem extends React.Component {
   };
 
   handleDragStart = (e) => {
+    e.stopPropagation();
     e.dataTransfer.effectAllowed = 'move';
     e.dataTransfer.setData('text', '');
+    window.currentSortGroup = this.props.name;
     if (this.props.onDragStart) {
       this.props.onDragStart(this.props.sortKey);
     }
@@ -33,6 +36,9 @@ class SortableItem extends React.Component {
 
   handleDragOver = (e)=> {
     e.preventDefault();
+    if (window.currentSortGroup !== this.props.name) {
+      return;
+    }
     if (!this.state.isOver) {
       this.setState({
         isOver: true
@@ -45,6 +51,9 @@ class SortableItem extends React.Component {
   };
 
   handleDragEnter = () => {
+    if (window.currentSortGroup !== this.props.name) {
+      return;
+    }
     this.setState({
       isOver: true
     });
@@ -54,6 +63,9 @@ class SortableItem extends React.Component {
   };
 
   handleDragLeave = () => {
+    if (window.currentSortGroup !== this.props.name) {
+      return;
+    }
     this.setState({
       isOver: false
     });
@@ -62,8 +74,10 @@ class SortableItem extends React.Component {
     }
   };
 
-  handleDrop = (e) => {
-    e.stopPropagation();
+  handleDrop = () => {
+    if (window.currentSortGroup !== this.props.name) {
+      return;
+    }
     this.setState({
       isOver: false
     });
@@ -73,6 +87,9 @@ class SortableItem extends React.Component {
   };
 
   handleDragEnd = () => {
+    if (window.currentSortGroup !== this.props.name) {
+      return;
+    }
     if (this.props.onDragEnd) {
       this.props.onDragEnd(this.props.sortKey);
     }

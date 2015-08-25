@@ -33,3 +33,26 @@ body {
   background-color: #F8F8F8;
   padding: 20px 0;
 }
+
+/* Sort nested items
+   ========================================================================== */
+.sort-sample-nested-items {
+  margin: 0;
+  .sort-group-item {
+    margin: 0 0 15px 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    border: none;
+    border-radius: 0;
+    text-align: left;
+    & > .panel {
+      margin: 0;
+    }
+    &.sortable-item-over {
+      & > .panel {
+        border-style: dashed;
+      }
+    }
+  }
+}
