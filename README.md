@@ -45,7 +45,8 @@ getInitialState: function () {
     });
     return (
       <div>
-        <SortableItems name='sort-sample' className='sort-sample-items' items={this.state.items} onSort={this.handleSort}>
+        <SortableItems name='sort-sample' className='sort-sample-items'
+          items={this.state.items} onSort={this.handleSort}>
           {items}
         </SortableItems>
       </div>
@@ -120,7 +121,7 @@ require('react-sortable-component/lib/sortable.css');
 | name | string | true |  |  |
 | children | node | true | | List of SortableItem |
 | items | array | false | | List item need sort. |
-| sort | function | false |  |  |
+| sort | function | false | [See](https://github.com/vn38minhtran/react-sortable-component/blob/master/src/SortableItems.js#L14) |  |
 | onSort | function(arg) | false | | Callback when items sorted. If `items` prop is defined then `arg` is sorted items else `arg` is list index of sorted items. |
 | className | string | false | | Your custom class name. |
 
