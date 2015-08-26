@@ -53,9 +53,17 @@ class SortableItems extends React.Component {
   };
 
   handleDrop = (sortKey) => {
-    let items = this.props.sort(this.props.items || this.state.keys, this.dragKey, sortKey);
-    if (this.props.onSort) {
-      this.props.onSort(items);
+    let result = this.props.sort(this.props.items || this.state.keys, this.dragKey, sortKey);
+    if (typeof result.then !== 'function') {
+      if (this.props.onSort) {
+        this.props.onSort(result);
+      }
+    } else {
+      result.then((items) => {
+        if (this.props.onSort) {
+          this.props.onSort(items);
+        }
+      });
     }
   };
 
