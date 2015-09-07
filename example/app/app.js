@@ -3,10 +3,10 @@ import React from 'react';
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
 import LazySizes from 'react-lazysizes';
-import {SortableItems, SortableItem} from '../src/index';
+import {SortableItems, SortableItem} from 'react-sortable-component';
 
 import './bower_components/bootstrap-customize/css/bootstrap.css';
-import '../src/sortable.scss';
+import 'react-sortable-component/src/sortable.scss';
 import './assets/styles/app.scss';
 
 class App extends React.Component {
