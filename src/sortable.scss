@@ -21,12 +21,12 @@
   height: 150px;
   width: 150px;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 2px;
   float: left;
   margin-left: 10px;
   text-align: center;
-  border: 2px solid #000;
-  background-color: #eee;
+  border: 1px solid #DDD;
+  background-color: #fff;
   cursor: move;
   .pointer-events-none {
     pointer-events: none;
@@ -34,5 +34,5 @@
 }
 
 .sortable-item-over {
-  border: 2px dashed #000;
+  border: 1px dashed #DDD;
 }

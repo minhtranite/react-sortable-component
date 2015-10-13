@@ -169,7 +169,7 @@ class App extends React.Component {
 }
 
 function run() {
-  React.render(<App />, document.body);
+  React.render(<App />, document.getElementById('app'));
 }
 
 if (window.addEventListener) {
