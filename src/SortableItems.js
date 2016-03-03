@@ -2,6 +2,7 @@ import React from 'react';
 
 class SortableItems extends React.Component {
   static propTypes = {
+    rootComponentType: React.PropTypes.any,
     name: React.PropTypes.string.isRequired,
     items: React.PropTypes.array,
     sort: React.PropTypes.func,
@@ -11,6 +12,7 @@ class SortableItems extends React.Component {
   };
 
   static defaultProps = {
+    rootComponentType: 'div',
     sort: (items, from, to) => {
       if (from === undefined || to === undefined) {
         return items;
@@ -90,11 +92,8 @@ class SortableItems extends React.Component {
       });
     }.bind(this));
     let className = 'sortable-items' + (this.props.className ? (' ' + this.props.className) : '');
-    return (
-      <div className={className}>
-        {newChildren}
-      </div>
-    );
+    return React.createElement(
+      this.props.rootComponentType, {className}, newChildren);
   }
 }
 

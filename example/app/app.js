@@ -5,7 +5,7 @@ import Footer from './components/Footer.js';
 import LazySizes from 'react-lazysizes';
 import {SortableItems, SortableItem} from 'react-sortable-component';
 
-import './bower_components/bootstrap-customize/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import 'react-sortable-component/src/sortable.scss';
 import './assets/styles/app.scss';
 
@@ -155,6 +155,24 @@ class App extends React.Component {
                           </SortableItems>
                         </div>
                       </div>
+                    </SortableItem>
+                  );
+                })
+              }
+            </SortableItems>
+
+            <h2>Custom Root Component</h2>
+            <hr/>
+            <SortableItems name='custom-root' className='list-group'
+              items={this.state.items} onSort={this.handleSort}
+              rootComponentType='ul'>
+              {
+                this.state.items.map((item, index) => {
+                  return (
+                    <SortableItem key={item.src} draggable={index !== 3}
+                      className='list-group-item' rootComponentType='li'>
+                      <LazySizes className='pointer-events-none'
+                          dataSrc={item.src} width='126' height='126'/>
                     </SortableItem>
                   );
                 })

@@ -13,11 +13,13 @@ class SortableItem extends React.Component {
     onDragLeave: React.PropTypes.func,
     onDrop: React.PropTypes.func,
     onDragEnd: React.PropTypes.func,
-    className: React.PropTypes.string
+    className: React.PropTypes.string,
+    rootComponentType: React.PropTypes.any
   };
 
   static defaultProps = {
-    draggable: true
+    draggable: true,
+    rootComponentType: 'div'
   };
 
   state = {
@@ -104,13 +106,19 @@ class SortableItem extends React.Component {
       classObj[this.props.className] = true;
     }
     let className = ClassNames(classObj);
-    return (
-      <div className={className} draggable={this.props.draggable}
-        onDragStart={this.handleDragStart} onDragOver={this.handleDragOver}
-        onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave}
-        onDrop={this.handleDrop} onDragEnd={this.handleDragEnd}>
-        {this.props.children}
-      </div>
+    return React.createElement(
+      this.props.rootComponentType,
+      {
+        className,
+        draggable: this.props.draggable,
+        onDragStart: this.handleDragStart,
+        onDragOver: this.handleDragOver,
+        onDragEnter: this.handleDragEnter,
+        onDragLeave: this.handleDragLeave,
+        onDrop: this.handleDrop,
+        onDragEnd: this.handleDragEnd
+      },
+      this.props.children
     );
   }
 }
