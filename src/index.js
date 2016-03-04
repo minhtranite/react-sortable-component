@@ -1,2 +1,4 @@
-exports.SortableItems = require('./SortableItems');
-exports.SortableItem = require('./SortableItem');
+import SortableItems from './SortableItems';
+import SortableItem from './SortableItem';
+
+export {SortableItems, SortableItem};

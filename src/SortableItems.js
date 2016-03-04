@@ -41,9 +41,7 @@ class SortableItems extends React.Component {
       children = [children];
     }
 
-    let keys = children.map(function (child, index) {
-      return index;
-    });
+    let keys = children.map((child, index) => index);
 
     this.setState({
       keys: keys
@@ -78,7 +76,7 @@ class SortableItems extends React.Component {
     if (!Array.isArray(children)) {
       children = [children];
     }
-    let newChildren = children.map(function (child, index) {
+    let newChildren = children.map((child, index) => {
       return React.cloneElement(child, {
         name: this.props.name,
         sortKey: index,
@@ -90,10 +88,9 @@ class SortableItems extends React.Component {
         onDrop: this.handleDrop,
         onDragEnd: this.handleDragEnd
       });
-    }.bind(this));
+    });
     let className = 'sortable-items' + (this.props.className ? (' ' + this.props.className) : '');
-    return React.createElement(
-      this.props.rootComponentType, {className}, newChildren);
+    return React.createElement(this.props.rootComponentType, {className}, newChildren);
   }
 }
 
