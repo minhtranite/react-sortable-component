@@ -120,7 +120,7 @@ require('react-sortable-component/lib/sortable.css');
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | name | string | true |  |  |
-| rootComponentType | string or ReactClass | false | `div` |  |
+| rootComponentType | string or ReactClass | false | `div` | EX: `ul` |
 | children | node | true | | List of SortableItem |
 | items | array | false | | List item need sort. |
 | sort | function | false | [See](https://github.com/vn38minhtran/react-sortable-component/blob/master/src/SortableItems.js#L14) |  |
@@ -131,7 +131,7 @@ require('react-sortable-component/lib/sortable.css');
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| rootComponentType | string or ReactClass | false | `div` |  |
+| rootComponentType | string or ReactClass | false | `div` | EX: `li` |
 | children | node | true | | Sortable item content. |
 | draggable | bool | false | true | |
 | className | string | false | | Your custom class name. |
