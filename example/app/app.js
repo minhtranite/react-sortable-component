@@ -1,5 +1,6 @@
 import 'babel-core/polyfill';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
 import LazySizes from 'react-lazysizes';
@@ -109,15 +110,20 @@ class App extends React.Component {
           <div className={"container"}>
             <h2>Simple</h2>
             <hr/>
-            <SortableItems name='simple-sort' className='simple-sort-items'
-              items={this.state.items} onSort={this.handleSort}>
+            <SortableItems name='simple-sort'
+              className='simple-sort-items'
+              items={this.state.items}
+              onSort={this.handleSort}>
               {
                 this.state.items.map((item, index) => {
                   return (
-                    <SortableItem key={item.src} draggable={index !== 3}
+                    <SortableItem key={item.src}
+                      draggable={index !== 3}
                       className='simple-sort-item'>
                       <LazySizes className='pointer-events-none'
-                        dataSrc={item.src} width='126' height='126'/>
+                        dataSrc={item.src}
+                        width='126'
+                        height='126'/>
                     </SortableItem>
                   );
                 })
@@ -128,7 +134,8 @@ class App extends React.Component {
             <hr/>
             <SortableItems name='nested-sort'
               className='sort-sample-nested-items'
-              items={this.state.nestedItems} onSort={this.handleNestedSort}>
+              items={this.state.nestedItems}
+              onSort={this.handleNestedSort}>
               {
                 this.state.nestedItems.map((item, index) => {
                   return (
@@ -146,7 +153,8 @@ class App extends React.Component {
                                 return (
                                   <SortableItem key={child.src}>
                                     <LazySizes className='pointer-events-none'
-                                      dataSrc={child.src} width='126'
+                                      dataSrc={child.src}
+                                      width='126'
                                       height='126'/>
                                   </SortableItem>
                                 );
@@ -161,18 +169,24 @@ class App extends React.Component {
               }
             </SortableItems>
 
-            <h2>Custom Root Component</h2>
+            <h2>Custom Root Component (UL/LI)</h2>
             <hr/>
-            <SortableItems name='custom-root' className='list-group'
-              items={this.state.items} onSort={this.handleSort}
+            <SortableItems name='custom-root'
+              className='list-group'
+              items={this.state.items}
+              onSort={this.handleSort}
               rootComponentType='ul'>
               {
                 this.state.items.map((item, index) => {
                   return (
-                    <SortableItem key={item.src} draggable={index !== 3}
-                      className='list-group-item' rootComponentType='li'>
+                    <SortableItem key={item.src}
+                      draggable={index !== 3}
+                      className='list-group-item'
+                      rootComponentType='li'>
                       <LazySizes className='pointer-events-none'
-                          dataSrc={item.src} width='126' height='126'/>
+                        dataSrc={item.src}
+                        width='126'
+                        height='126'/>
                     </SortableItem>
                   );
                 })
@@ -187,7 +201,7 @@ class App extends React.Component {
 }
 
 function run() {
-  React.render(<App />, document.getElementById('app'));
+  ReactDOM.render(<App />, document.getElementById('app'));
 }
 
 if (window.addEventListener) {
