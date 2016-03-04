@@ -10,8 +10,7 @@
   margin-left: -10px;
 }
 
-.sortable-items:before,
-.sortable-items:after {
+.sortable-items:before, .sortable-items:after {
   content: " ";
   display: table;
 }
