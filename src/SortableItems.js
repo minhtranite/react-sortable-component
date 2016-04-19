@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 
 class SortableItems extends React.Component {
   static propTypes = {
@@ -53,15 +54,17 @@ class SortableItems extends React.Component {
   };
 
   handleDrop = (sortKey) => {
-    let result = this.props.sort(this.props.items || this.state.keys, this.dragKey, sortKey);
+    let {sort, items, onSort} = this.props;
+    let {keys} = this.state;
+    let result = sort(items || keys, this.dragKey, sortKey);
     if (typeof result.then !== 'function') {
-      if (this.props.onSort) {
-        this.props.onSort(result);
+      if (onSort) {
+        onSort(result);
       }
     } else {
-      result.then((items) => {
-        if (this.props.onSort) {
-          this.props.onSort(items);
+      result.then((response) => {
+        if (onSort) {
+          onSort(response);
         }
       });
     }
@@ -72,7 +75,7 @@ class SortableItems extends React.Component {
   };
 
   render() {
-    let children = this.props.children;
+    let {children, className, rootComponentType} = this.props;
     if (!Array.isArray(children)) {
       children = [children];
     }
@@ -89,8 +92,8 @@ class SortableItems extends React.Component {
         onDragEnd: this.handleDragEnd
       });
     });
-    let className = 'sortable-items' + (this.props.className ? (' ' + this.props.className) : '');
-    return React.createElement(this.props.rootComponentType, {className}, newChildren);
+    className = classnames('sortable-items', className).trim();
+    return React.createElement(rootComponentType, {className}, newChildren);
   }
 }
 

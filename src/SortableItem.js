@@ -1,5 +1,5 @@
 import React from 'react';
-import ClassNames from 'classnames';
+import classnames from 'classnames';
 
 class SortableItem extends React.Component {
   static propTypes = {
@@ -27,99 +27,100 @@ class SortableItem extends React.Component {
   };
 
   handleDragStart = (e) => {
+    let {name, onDragStart, sortKey} = this.props;
     e.stopPropagation();
     e.dataTransfer.effectAllowed = 'move';
     e.dataTransfer.setData('text', '');
-    window.currentSortGroup = this.props.name;
-    if (this.props.onDragStart) {
-      this.props.onDragStart(this.props.sortKey);
+    window.currentSortGroup = name;
+    if (onDragStart) {
+      onDragStart(sortKey);
     }
   };
 
   handleDragOver = (e)=> {
     e.preventDefault();
-    if (window.currentSortGroup !== this.props.name) {
+    let {isOver} = this.state;
+    let {name, onDragOver, sortKey} = this.props;
+    if (window.currentSortGroup !== name) {
       return;
     }
-    if (!this.state.isOver) {
+    if (!isOver) {
       this.setState({
         isOver: true
       });
     }
     e.dataTransfer.dropEffect = 'move';
-    if (this.props.onDragOver) {
-      this.props.onDragOver(this.props.sortKey);
+    if (onDragOver) {
+      onDragOver(sortKey);
     }
   };
 
   handleDragEnter = () => {
-    if (window.currentSortGroup !== this.props.name) {
+    let {name, onDragEnter, sortKey} = this.props;
+    if (window.currentSortGroup !== name) {
       return;
     }
     this.setState({
       isOver: true
     });
-    if (this.props.onDragEnter) {
-      this.props.onDragEnter(this.props.sortKey);
+    if (onDragEnter) {
+      onDragEnter(sortKey);
     }
   };
 
   handleDragLeave = () => {
-    if (window.currentSortGroup !== this.props.name) {
+    let {name, onDragLeave, sortKey} = this.props;
+    if (window.currentSortGroup !== name) {
       return;
     }
     this.setState({
       isOver: false
     });
-    if (this.props.onDragLeave) {
-      this.props.onDragLeave(this.props.sortKey);
+    if (onDragLeave) {
+      onDragLeave(sortKey);
     }
   };
 
   handleDrop = () => {
-    if (window.currentSortGroup !== this.props.name) {
+    let {name, onDrop, sortKey} = this.props;
+    if (window.currentSortGroup !== name) {
       return;
     }
     this.setState({
       isOver: false
     });
-    if (this.props.onDrop) {
-      this.props.onDrop(this.props.sortKey);
+    if (onDrop) {
+      onDrop(sortKey);
     }
   };
 
   handleDragEnd = () => {
-    if (window.currentSortGroup !== this.props.name) {
+    let {name, onDragEnd, sortKey} = this.props;
+    if (window.currentSortGroup !== name) {
       return;
     }
-    if (this.props.onDragEnd) {
-      this.props.onDragEnd(this.props.sortKey);
+    if (onDragEnd) {
+      onDragEnd(sortKey);
     }
   };
 
   render() {
-    let classObj = {
-      'sortable-item': true,
-      'sortable-item-over': this.state.isOver
+    let {className, rootComponentType, draggable, children} = this.props;
+    let {isOver} = this.state;
+    className = classnames('sortable-item', className, {
+      'sortable-item-over': isOver
+    });
+    let props = {
+      className,
+      draggable: draggable,
+      onDragStart: this.handleDragStart,
+      onDragOver: this.handleDragOver,
+      onDragEnter: this.handleDragEnter,
+      onDragLeave: this.handleDragLeave,
+      onDrop: this.handleDrop,
+      onDragEnd: this.handleDragEnd
     };
-    if (this.props.className) {
-      classObj[this.props.className] = true;
-    }
-    let className = ClassNames(classObj);
-    return React.createElement(
-      this.props.rootComponentType,
-      {
-        className,
-        draggable: this.props.draggable,
-        onDragStart: this.handleDragStart,
-        onDragOver: this.handleDragOver,
-        onDragEnter: this.handleDragEnter,
-        onDragLeave: this.handleDragLeave,
-        onDrop: this.handleDrop,
-        onDragEnd: this.handleDragEnd
-      },
-      this.props.children
-    );
+    return React.createElement(rootComponentType, props, children);
   }
 }
 

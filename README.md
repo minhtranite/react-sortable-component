@@ -15,43 +15,49 @@ npm install --save react-sortable-component
 ```js
 var {SortableItems, SortableItem} = require('react-sortable-component');
 ...
-getInitialState: function () {
-    return {
-      items: [
-        {src: 'http://lorempixel.com/400/400/sports/1'},
-        {src: 'http://lorempixel.com/400/400/sports/2'},
-        {src: 'http://lorempixel.com/400/400/sports/3'},
-        {src: 'http://lorempixel.com/400/400/sports/4'},
-        {src: 'http://lorempixel.com/400/400/sports/5'},
-        {src: 'http://lorempixel.com/400/400/sports/6'},
-        {src: 'http://lorempixel.com/400/400/sports/7'}
-      ]
-    };
-  },
-  handleSort: function (items) {
-    this.setState({
-      items: items
-    });
-  },
-  render: function () {
-    var items = this.state.items.map(function (item) {
-      return (
-        <SortableItem key={item.src} className='sort-sample-item'>
-          <LazySizes className='pointer-events-none' dataSrc={item.src}
-            width='126'
-            height='126'/>
-        </SortableItem>
-      );
-    });
-    return (
-      <div>
-        <SortableItems name='sort-sample' className='sort-sample-items'
-          items={this.state.items} onSort={this.handleSort}>
-          {items}
-        </SortableItems>
-      </div>
-    );
-  }
+state = {
+  items: [
+    {src: 'http://lorempixel.com/400/400/sports/1'},
+    {src: 'http://lorempixel.com/400/400/sports/2'},
+    {src: 'http://lorempixel.com/400/400/sports/3'},
+    {src: 'http://lorempixel.com/400/400/sports/4'},
+    {src: 'http://lorempixel.com/400/400/sports/5'},
+    {src: 'http://lorempixel.com/400/400/sports/6'}
+  ]
+};
+
+handleSort = (items) => {
+  this.setState({
+    items: items
+  });
+};
+
+render() {
+  let {items} = this.state;
+  return (
+    <Document title="Home | React sortable component" className="page-home">
+      <SortableItems name="simple-sort"
+        className="simple-sort-items"
+        items={items}
+        onSort={this.handleSort}>
+        {
+          items.map((item, index) => {
+            return (
+              <SortableItem key={item.src}
+                draggable={index !== 3}
+                className="simple-sort-item">
+                <LazySizes className="pointer-events-none"
+                  dataSrc={item.src}
+                  width="126"
+                  height="126"/>
+              </SortableItem>
+            );
+          })
+        }
+      </SortableItems>
+    </Document>
+  );
+}
 
 ```
 
@@ -111,6 +117,18 @@ require('react-sortable-component/lib/sortable.css');
   border: 1px dashed #DDD;
 }
 
+```
+
+### UMD
+
+```html
+<link rel="stylesheet" type="text/css" href="path/to/react-sortable-component/dist/react-sortable-component.css">
+<script src="path/to//react-sortable-component/dist/react-sortable-component.js"></script>
+```
+
+```js
+var SortableItems = window.ReactSortableComponent.SortableItems;
+var SortableItem = window.ReactSortableComponent.SortableItem;
 ```
 
 ## Props
