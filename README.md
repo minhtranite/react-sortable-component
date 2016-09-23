@@ -156,4 +156,4 @@ var SortableItem = window.ReactSortableComponent.SortableItem;
 
 ## Example
 
-View [demo](http://vn38minhtran.github.io/react-sortable-component) or example folder.
+View [demo](http://minhtranite.github.io/react-sortable-component) or example folder.
